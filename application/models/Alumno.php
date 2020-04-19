@@ -3,8 +3,8 @@ class Alumno extends usuario{
     private $tabla = 'alumno';
     private $persona;
 
-    public function __construct($usuario, $contraseña, $nombres, $apellidoP, $apellidoM) {
-        parent::__construct($usuario, $contraseña);
+    public function __construct($usuario, $contraseña, $nombres, $apellidoP, $apellidoM, $tipoUsuario) {
+        parent::__construct($usuario, $contraseña, $tipoUsuario);
         $this->persona = new Persona($nombres, $apellidoP, $apellidoM);
     }
 

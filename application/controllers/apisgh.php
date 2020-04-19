@@ -10,18 +10,28 @@ class apisgh extends RestController {
 		$this->load->model('Usuario'); 
 	}
 	
-	public function alumno_get() {
+	public function alumnos_get($usuario = null) {
 		try {
-			$data = $this->db->get('alumno')->result();
-
+			if($usuario === null) {
+				$this->db->from('alumno');
+				$data = $this->db->get()->result();
+			}else {
+				$this->db->select('Nombres, ApellidoP, ApellidoM');
+				$this->db->from('alumno');
+				$this->db->where('Usuario', $usuario);
+				$data = $this->db->get()->result();
+			}
+			array_push($data, ['success' => true]);
 			$this->response($data, 200);
-		} catch (\Throwable $th) {
-			$data['success'] = false; 
-			$this->response($data,404);
+		} catch (\Exception $e) {
+			$data['success'] = false;
+			$data['message'] = $e->getMessage();
+			$this->response($data, 404);
 		}
 		
 	}
 	public function usuario_get(){
+		
 		try {
 			
 			$this->response($this->Usuario->findUsers(), 200);
@@ -29,5 +39,41 @@ class apisgh extends RestController {
 			$data['success'] = false; 
 			$this->response($data,404);
 		}
+	}
+
+	public function login_get($usuario, $contraseña){
+		try {
+			
+		} catch (\Throwable $th) {
+
+		}
+	}
+
+	public function maestros_get($usuario = null) {
+
+	}
+
+	public function grupos_get() {
+
+	}
+
+	public function materias_get($Clv_grupo) {
+
+	}
+
+	public function aulas_get() {
+
+	}
+
+	public function maestros_materias_get($Clv_materia) {
+
+	}
+
+	public function alumnos_horarios_post($usuario, $dia = null) {
+	
+	}
+
+	public function maestros_horarios_post($usuario, $dia = null) {
+
 	}
 }

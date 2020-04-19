@@ -53,4 +53,22 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['api/alumno'] = 'apisgh/alumno';
+$route['api/alumnos']['get'] = 'apisgh/alumnos';
+$route['api/alumnos/(.+)']['get'] = 'apisgh/alumnos/$1';
+
+$route['api/login/(.+)']['get'] = 'apisgh/login/$1/$2';
+
+$route['api/maestros']['get'] = 'apisgh/maestros';
+$route['api/maestros/(.+)']['get'] = 'apisgh/maestros/$1';
+
+$route['api/grupos']['get'] = 'apisgh/grupos';
+
+$route['api/materias/(.+)']['get'] = 'apisgh/materias/$1';
+
+$route['api/aulas']['get'] = 'apisgh/aulas';
+
+$route['api/maestros_materias/(.+)']['get'] = 'apisgh/maestro_materia/$1';
+
+$route['api/alumnos_horarios/(.+)']['post'] = 'apisgh/alumno_horario/$1/$2';
+
+$route['api/maestros_horarios/(.+)']['post'] = 'apisgh/maestros_horarios/$1/$2';

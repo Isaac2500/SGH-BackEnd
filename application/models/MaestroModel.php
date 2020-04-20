@@ -1,4 +1,6 @@
 <?php
+require(APPPATH.'models/Consulta.php');
+
 class MaestroModel extends CI_Model{
 
     public function __construct() {
@@ -6,7 +8,7 @@ class MaestroModel extends CI_Model{
         $this->load->database();
     }
 
-    public function findMaestro($usuario) {
+    public function findSpecific($usuario) {
         $this->db->select('nombres, ApellidoP, ApellidoM');
         $this->db->from('Maestro');
         $this->db->where('Usuario = ', $usuario);
@@ -20,19 +22,8 @@ class MaestroModel extends CI_Model{
         }
     }
 
-
-    public function materiasPorMaestro($Clv_Materia) {
-        $sql = "SELECT Imparten.Maestro, Maestro.Nombres, Maestro.ApellidoM, Maestro.ApellidoP 
-        FROM Imparten Imparten JOIN Maestro Maestro ON Imparten.Maestro = Maestro.Usuario WHERE 
-        Clv_Materia = ?";
-        $query = $this->db->query($sql, $Clv_Materia);
-
-        if($query->num_rows() > 0) {
-            return $query->result();
-        }else {
-            $mensaje['mensaje'] = 'No se encontraron coincidencias';
-            return $mensaje;
-        }
+    public function findAll() {
+        // no implementado
     }
 
     public function revisarHorario($usuario) {

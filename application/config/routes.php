@@ -53,21 +53,20 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['api/alumnos/(.+)']['get'] = 'apisgh/alumnos/$1';
-$route['api/alumnos_horarios/(.+)']['get'] = 'apisgh/alumnos_horarios/$1/$2';
+$route['api/alumnos/(:any)']['get'] = 'AlumnoController/alumnos/$1';
+$route['api/alumnos/(:any)/horarios/(:any)']['get'] = 'AlumnoController/alumnos_horarios/$1/$2';
 
-$route['api/maestros/(.+)']['get'] = 'apisgh/maestros/$1';
-$route['api/maestros_horarios/(.+)']['get'] = 'apisgh/maestros_horarios/$1/$2';
-$route['api/materias_maestros/(.+)']['get'] = 'apisgh/materias_maestros/$1';
+$route['api/maestros/(:any)']['get'] = 'MaestroController/maestros/$1';
+$route['api/maestros/(:any)/horarios/(:any)']['get'] = 'MaestroController/maestros_horarios/$1/$2';
 
-$route['api/administradores/(.+)']['get'] = 'apisgh/administradores/$1';
+$route['api/administradores/(:any)']['get'] = 'AdministradorController/administradores/$1';
+$route['api/horarios']['post'] = 'AdministradorController/horarios';
 
-$route['api/horarios/(.+)']['post'] = 'apisgh/horarios/$1/$2/$3/$4/$5/$6/$7';
+$route['api/usuarios/(:any)']['get'] = 'UsuarioController/usuarios/$1';
 
-$route['api/login/(.+)']['get'] = 'apisgh/login/$1/$2';
+$route['api/grupos']['get'] = 'GrupoController/grupos';
+$route['api/grupos/(:any)']['get'] = 'GrupoController/tipo_materia/$1';
 
-$route['api/grupos']['get'] = 'apisgh/grupos';
+$route['api/materias/(:any)']['get'] = 'MateriaController/imparten_maestros/$1';
 
-$route['api/materias/(.+)']['get'] = 'apisgh/materias/$1';
-
-$route['api/aulas']['get'] = 'apisgh/aulas';
+$route['api/aulas']['get'] = 'AulaController/aulas';

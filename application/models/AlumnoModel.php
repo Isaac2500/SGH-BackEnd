@@ -27,17 +27,12 @@ class AlumnoModel extends CI_Model implements Consulta{
     }
 
     public function revisarHorarioDia($usuario, $dia) {
-        $sql = "SELECT Horario.Clv_Horario, Maestro.Nombres, Maestro.ApellidoM, Maestro.ApellidoP, Materia.Materia, Horario.Materia,Horario.aula, Horario.HInicio,Horario.HFinal,Horario.Dia 
-        FROM alumno alumno
-        JOIN Grupo Grupo
-        ON alumno.clv_Grupo = grupo.Clv_Grupo 
-        JOIN Horario Horario
-        ON grupo.Clv_grupo = horario.Grupo
-        JOIN Materia Materia
-        ON Horario.materia = Materia.Clv_Materia
-        JOIN Maestro Maestro
-        ON Horario.Maestro = Maestro.Usuario
-        WHERE Alumno.Usuario = ? AND Dia = ?";
+        $sql = "SELECT Horario.Clv_Horario,Maestro.Nombres, Maestro.ApellidoM, Maestro.ApellidoP,Materia.Materia, 
+        Horario.Materia,Horario.aula,Horario.HInicio,Horario.HFinal,Horario.Dia from alumno alumno join Grupo Grupo 
+        on alumno.clv_Grupo = grupo.Clv_Grupo join Horario Horario on grupo.Clv_grupo=horario.Grupo Join Materia Materia
+        on Horario.materia = Materia.Clv_Materia Join Maestro Maestro on Horario.Maestro = Maestro.Usuario where
+        Alumno.Usuario = ? AND Dia = ? ";
+
         $query = $this->db->query($sql, array($usuario, $dia));
 
         if($query->num_rows() > 0) {

@@ -62,6 +62,7 @@ $route['api/maestros/(:any)/horarios/(:any)']['get'] = 'MaestroController/maestr
 $route['api/administradores/(:any)']['get'] = 'AdministradorController/administradores/$1';
 $route['api/horarios']['post'] = 'AdministradorController/horarios';
 
+$route['api/usuarios']['get'] = 'UsuarioController/usuarios';
 $route['api/usuarios/(:any)']['get'] = 'UsuarioController/usuarios/$1';
 
 $route['api/grupos']['get'] = 'GrupoController/grupos';

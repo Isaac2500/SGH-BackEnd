@@ -13,15 +13,20 @@ class UsuarioController extends RestController {
         $this->peticion = new Peticion();
     }
     
-	public function usuarios_get($usuario) {
-		try {
-			$data = $this->UsuarioModel->findSpecific($usuario);
+	public function usuarios_get($usuario = null) {
+        try {
+			if(isset($usuario)) {
+				$data = $this->UsuarioModel->findSpecific($usuario);
+			}else {
+				$data = $this->UsuarioModel->findAll();
+			}
 			$response = $this->peticion->aceptada($data);
 		} catch (\Exception $e) {
-            $reponse = $this->peticion->rechazada();
+			$response = $this->peticion->rechazada();
 		}
-		
+
 		$this->response($response['response'], $response['codeHTTP']);
-	}
+    }
+    
 }
 ?>

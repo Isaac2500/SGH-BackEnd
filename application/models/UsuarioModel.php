@@ -23,7 +23,17 @@ class UsuarioModel extends CI_Model implements Consulta{
     }
 
     public function findAll() {
-        // no implementado
+        $sql = "SELECT Usuario, contrasena, TipoUser, nombres, apellidoP, apellidoM FROM administrador UNION 
+        SELECT Usuario, contrasena, TipoUser, nombres, apellidoP, apellidoM FROM alumno UNION 
+        SELECT Usuario, contrasena, TipoUser, nombres, apellidoP, apellidoM FROM maestro";
+        $query = $this->db->query($sql);
+
+        if($query->num_rows() > 0) {
+            return $query->result();
+        }else {
+            $mensaje['mensaje'] = 'No se encontraron coincidencias';
+            return $mensaje;
+        }
     }
 }
 ?>

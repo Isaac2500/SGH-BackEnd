@@ -32,7 +32,13 @@ class Usuario extends CI_Model{
         SELECT Usuario, contrasena, TipoUser FROM Maestro AS maestro UNION
         SELECT Usuario, contrasena, TipoUser FROM Administrador AS administrador) As usuarios WHERE Usuario = '".$usuario."' AND contrasena = '".$contrasena."'");
 
-        return $query->result();
+        $mensaje['Autorizacion']='Invalid';
+
+        if ($query->num_rows()>0) {
+            return $query->result();
+        }else{
+            return $mensaje;
+        }
         
     }
 }

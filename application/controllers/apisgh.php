@@ -47,8 +47,8 @@ class apisgh extends RestController {
 	public function login_get($usuario, $contrasena){
 		try {
 
-			$mensaje['Validacion'] = $this->Usuario->findSpecificUser($usuario, $contrasena);
-			$this->response($mensaje,200);
+			
+			$this->response($this->Usuario->findSpecificUser($usuario, $contrasena),200);
 			
 		} catch (\Throwable $th) {
 			$data['success'] = false; 
@@ -84,7 +84,7 @@ class apisgh extends RestController {
 		}
 	}
 
-	public function maestros_materias_get($Clv_Materia) {
+	public function maestro_materia_get($Clv_Materia) {
 		try {
 
 			$this->response($this->Maestro->materiasPorMaestro($Clv_Materia),200);

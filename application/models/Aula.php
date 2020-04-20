@@ -13,7 +13,7 @@
         {
             $this->db->select();
             $this->db->from("aula");
-            $query = $this->bd->get();
+            $query = $this->db->get();
 
             return $query->result();
         }

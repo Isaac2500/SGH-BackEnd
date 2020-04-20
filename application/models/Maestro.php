@@ -15,7 +15,7 @@ class Maestro extends CI_Model{
 
     public function materiasPorMaestro($Clv_Materia){
         
-        $query = $this->bd->query("SELECT Imparten.Maestro,Maestro.Nombres, Maestro.ApellidoM, Maestro.ApellidoP FROM Imparten Imparten JOIN Maestro Maestro ON Imparten.Maestro = Maestro.Usuario WHERE Clv_Materia = '".$Clv_Materia."'");
+        $query = $this->db->query("SELECT Imparten.Maestro,Maestro.Nombres, Maestro.ApellidoM, Maestro.ApellidoP FROM Imparten Imparten JOIN Maestro Maestro ON Imparten.Maestro = Maestro.Usuario WHERE Clv_Materia = '".$Clv_Materia."'");
         return $query->result();
 
 

@@ -7,108 +7,163 @@ class apisgh extends RestController {
 	public function __construct() {
 		parent::__construct();
 		$this->load->database();  
-		$this->load->model('Usuario'); 
+		$this->load->model('UsuarioModel'); 
 		$this->load->model('GrupoModel');
-		$this->load->model('Maestro');
-		$this->load->model('Aula');
+		$this->load->model('MaestroModel');
+		$this->load->model('AdministradorModel');
+		$this->load->model('AlumnoModel');
+		$this->load->model('AulaModel');
+		$this->load->model('MateriaModel');
 	}
 	
-	public function alumnos_get($usuario = null) {
+	public function alumnos_get($usuario) {
 		try {
-			if($usuario === null) {
-				$this->db->from('alumno');
-				$data = $this->db->get()->result();
-			}else {
-				$this->db->select('Nombres, ApellidoP, ApellidoM');
-				$this->db->from('alumno');
-				$this->db->where('Usuario', $usuario);
-				$data = $this->db->get()->result();
-			}
-			array_push($data, ['success' => true]);
-			$this->response($data, 200);
+			$response['data'] = $this->AlumnoModel->findAlumno($usuario);
+			$response['success'] = true;
+			$response['message'] = "Successful Request";
 		} catch (\Exception $e) {
-			$data['success'] = false;
-			$data['message'] = $e->getMessage();
-			$this->response($data, 404);
+			$response['success'] = false;
+			$response['message'] = $e->getMessage();
 		}
 		
+		$this->response($response, 200);
 	}
-	public function usuario_get(){
 
+	public function alumnos_horarios_get($usuario, $dia = null) {
 		try {
-			
-			$this->response($this->Usuario->findUsers(), 200);
-		} catch (\Throwable $th) {
-			$data['success'] = false; 
-			$this->response($data,404);
+			if(isset($dia)) {
+				$response['data'] = $this->AlumnoModel->revisarHorario($usuario);
+			}else {
+				$response['data'] = $this->AlumnoModel->revisarHorario($usuario, $dia);
+			}
+			$response['success'] = true;
+			$response['message'] = "Successful Request";
+		} catch (\Exception $e) {
+			$response['success'] = false;
+			$response['message'] = $e->getMessage();
 		}
+		
+		$this->response($response, 200);
+	}
+
+	public function maestros_get($usuario) {
+		try {
+			$response['data'] = $this->MaestroModel->findMaestro($usuario);
+			$response['success'] = true;
+			$response['message'] = "Successful Request";
+		} catch (\Exception $e) {
+			$response['success'] = false;
+			$response['message'] = $e->getMessage();
+		}
+		
+		$this->response($response, 200);
+	}
+
+	public function materias_maestros_get($Clv_Materia) {
+		try {
+			$response['data'] = $this->MaestroModel->materiasPorMaestro($Clv_Materia);
+			$response['success'] = true;
+			$response['message'] = "Successful Request";
+		} catch (\Exception $e) {
+			$response['success'] = false;
+			$response['message'] = $e->getMessage();
+		}
+		
+		$this->response($response, 200);
+	}
+
+	public function maestros_horarios_get($usuario, $dia = null) {
+		try {
+			if(isset($dia)) {
+				$response['data'] = $this->MaestroModel->revisarHorario($usuario);
+			}else {
+				$response['data'] = $this->MaestroModel->revisarHorarioDia($usuario, $dia);
+			}
+			$response['success'] = true;
+			$response['message'] = "Successful Request";
+		} catch (\Exception $e) {
+			$response['success'] = false;
+			$response['message'] = $e->getMessage();
+		}
+		
+		$this->response($response, 200);
+	}
+
+	public function administradores_get($usuario) {
+		try {
+			$response['data'] = $this->AdministradorModel->findAdministrador($usuario);
+			$response['success'] = true;
+			$response['message'] = "Successful Request";
+		} catch (\Exception $e) {
+			$response['success'] = false;
+			$response['message'] = $e->getMessage();
+		}
+		
+		$this->response($response, 200);
+	}
+
+	public function horarios_post($maestro, $grupo, $materia, $aula, $hInicio, $hFinal, $dia) {
+		try {
+			$this->AdministradorModel->agregarHorario($maestro, $grupo, $materia, $aula, $hInicio, $hFinal, $dia);
+			$response['success'] = true;
+			$response['message'] = "Successful Creation";
+		} catch (\Exception $e) {
+			$response['success'] = false;
+			$response['message'] = $e->getMessage();
+		}
+		
+		$this->response($response, 200);
 	}
 
 	public function login_get($usuario, $contrasena){
 		try {
-
-			
-			$this->response($this->Usuario->findSpecificUser($usuario, $contrasena),200);
-			
-		} catch (\Throwable $th) {
-			$data['success'] = false; 
-			$this->response($data,404);
+			$response['data'] = $this->UsuarioModel->findUsuario($usuario, $contrasena);
+			$response['success'] = true;
+			$response['message'] = "Successful Request";
+		} catch (\Exception $e) {
+			$response['success'] = false;
+			$response['message'] = $e->getMessage();
 		}
-	}
-
-	public function maestros_get($usuario = null) {
-
+		
+		$this->response($response, 200);
 	}
 
 	public function grupos_get() {
 		try {
-
-			$this->response($this->GrupoModel->findGrupos(),200);
-			
-		} catch (\Throwable $th) {
-			$data['success'] = false; 
-			$this->response($data,404);
+			$response['data'] = $this->GrupoModel->findGrupos();
+			$response['success'] = true;
+			$response['message'] = "Successful Request";
+		} catch (\Exception $e) {
+			$response['success'] = false;
+			$response['message'] = $e->getMessage();
 		}
+		
+		$this->response($response, 200);
 	}
 
 	public function materias_get($Clv_grupo) {
 		try {
-			$this->response($this->GrupoModel->materiaPorGrupo($Clv_grupo),200);
-		} catch (\Throwable $th) {
-			$data['success'] = false; 
-			$this->response($data,404);
+			$response['data'] = $this->MateriaModel->findMateria($Clv_grupo);
+			$response['success'] = true;
+			$response['message'] = "Successful Request";
+		} catch (\Exception $e) {
+			$response['success'] = false;
+			$response['message'] = $e->getMessage();
 		}
+		
+		$this->response($response, 200);
 	}
 
 	public function aulas_get() {
 		try {
-			$this->response($this->Aula->findAulas(),200);
-		} catch (\Throwable $th) {
-			$data['success'] = false; 
-			$this->response($data,404);
+			$response['data'] = $this->AulaModel->findAulas();
+			$response['success'] = true;
+			$response['message'] = "Successful Request";
+		} catch (\Exception $e) {
+			$response['success'] = false;
+			$response['message'] = $e->getMessage();
 		}
-	}
-
-	public function maestros_materias_get($Clv_Materia) {
-		try {
-
-			$this->response($this->Maestro->materiasPorMaestro($Clv_Materia),200);
-			
-		} catch (\Throwable $th) {
-			$data['success'] = false; 
-			$this->response($data,404);
-		}
-	}
-
-	public function horarios_post($maestro, $grupo, $materia, $aula, $hInicio, $hFinal, $dia) {
-
-	}
-
-	public function alumnos_horarios_get($usuario, $dia = null) {
 		
-	}
-
-	public function maestros_horarios_get($usuario, $dia = null) {
-
+		$this->response($response, 200);
 	}
 }

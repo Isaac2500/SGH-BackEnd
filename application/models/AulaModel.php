@@ -1,14 +1,13 @@
 <?php
-class GrupoModel extends CI_Model {
-
+class AulaModel extends CI_Model {
     public function __construct() {
         parent::__construct();
         $this->load->database();
     }
 
-    public function findGrupos(){
-        $this->db->select('Clv_Grupo');
-        $this->db->from('Grupo');
+    public function findAulas() {
+        $this->db->select();
+        $this->db->from("aula");
         $query = $this->db->get();
 
         if($query->num_rows() > 0) {

@@ -20,6 +20,41 @@ class Maestro extends CI_Model{
 
 
     }
+
+    public function findMaestro($usuario)
+    {
+        $this->db->select('nombres, ApellidoP, ApellidoM');
+        $this->db->from('Maestro');
+        $this->db->where('Usuario =', $usuario);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function revisarHorario($usuario)
+    {
+        $query = $this->db->query("Select Horario.Clv_horario, Grupo.Clv_Grupo, Grupo.Clv_Carrera, Horario.Aula, Horario.HInicio, Horario.HFinal,Horario.Dia  
+        from Horario Horario
+        join Maestro Maestro
+        on Maestro.Usuario = horario.Maestro
+        join Grupo Grupo
+        on Horario.Grupo = Grupo.Clv_Grupo
+        where Maestro.Usuario = '".$usuario."'");
+
+        return $query->result();
+    }
+
+    public function revisarHorarioDia($usuario, $dia)
+    {
+        $query = $this->db->query("Select Horario.Clv_horario, Grupo.Clv_Grupo, Grupo.Clv_Carrera, Horario.Aula, Horario.HInicio, Horario.HFinal,Horario.Dia  
+        from Horario Horario
+        join Maestro Maestro
+        on Maestro.Usuario = horario.Maestro
+        join Grupo Grupo
+        on Horario.Grupo = Grupo.Clv_Grupo
+        where Maestro.Usuario = '".$usuario."' and Dia='".$dia."'");
+
+        return $query->result();
+    }
     public function getTabla() {
         return $this->tabla;
     }

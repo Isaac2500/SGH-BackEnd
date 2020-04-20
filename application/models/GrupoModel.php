@@ -29,4 +29,9 @@ class GrupoModel extends CI_Model {
 
         return $consulta->result();
     }
+
+    public function materiaPorGrupo($Clv_grupo){
+        $query = $this->db->query("Select clv_materia,Materia from tienen natural join Grupo natural join materia where Clv_grupo = '".$Clv_grupo."'");
+        return $query->result();
+    }
 }

@@ -72,7 +72,12 @@ class apisgh extends RestController {
 	}
 
 	public function materias_get($Clv_grupo) {
-
+		try {
+			$this->response($this->GrupoModel->materiaPorGrupo($Clv_grupo),200);
+		} catch (\Throwable $th) {
+			$data['success'] = false; 
+			$this->response($data,404);
+		}
 	}
 
 	public function aulas_get() {

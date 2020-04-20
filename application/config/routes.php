@@ -69,6 +69,8 @@ $route['api/aulas']['get'] = 'apisgh/aulas';
 
 $route['api/maestros_materias/(.+)']['get'] = 'apisgh/maestro_materia/$1';
 
-$route['api/alumnos_horarios/(.+)']['post'] = 'apisgh/alumno_horario/$1/$2';
+$route['api/horarios/(.+)']['post'] = 'apisgh/horarios/$1/$2/$3/$4/$5/$6/$7';
 
-$route['api/maestros_horarios/(.+)']['post'] = 'apisgh/maestros_horarios/$1/$2';
+$route['api/alumnos_horarios/(.+)']['get'] = 'apisgh/alumno_horario/$1/$2';
+
+$route['api/maestros_horarios/(.+)']['get'] = 'apisgh/maestros_horarios/$1/$2';

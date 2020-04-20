@@ -89,7 +89,7 @@ class apisgh extends RestController {
 		}
 	}
 
-	public function maestro_materia_get($Clv_Materia) {
+	public function maestros_materias_get($Clv_Materia) {
 		try {
 
 			$this->response($this->Maestro->materiasPorMaestro($Clv_Materia),200);
@@ -100,11 +100,15 @@ class apisgh extends RestController {
 		}
 	}
 
-	public function alumnos_horarios_post($usuario, $dia = null) {
+	public function horarios_post($maestro, $grupo, $materia, $aula, $hInicio, $hFinal, $dia) {
+
+	}
+
+	public function alumnos_horarios_get($usuario, $dia = null) {
 		
 	}
 
-	public function maestros_horarios_post($usuario, $dia = null) {
+	public function maestros_horarios_get($usuario, $dia = null) {
 
 	}
 }

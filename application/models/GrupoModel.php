@@ -2,13 +2,14 @@
 class GrupoModel extends CI_Model {
     private $tabla = 'grupo';
     private $clvGrupo = 'Clv_Grupo';
-    private $materia;
+    /* private $materia;
     private $aula;
     private $carrera;
     private $alumnos;
-    private $maestro;
+    private $maestro; */
 
     public function __construct() {
+        parent::__construct();
         $this->load->database();
     }
 
@@ -18,6 +19,14 @@ class GrupoModel extends CI_Model {
         $this->db->where($this->clvGrupo, $clvGrupo);
         $consulta = $this->db->get();
         
+        return $consulta->result();
+    }
+
+    public function findGrupos(){
+        $this->db->Select($this->clvGrupo);
+        $this->db->from($this->tabla);
+        $consulta = $this->db->get();
+
         return $consulta->result();
     }
 }

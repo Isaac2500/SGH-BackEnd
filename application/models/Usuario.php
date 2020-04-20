@@ -1,8 +1,6 @@
 <?php
 class Usuario extends CI_Model{
-    /* private $usuario;
-    private $contraseña;
-    private $tipoUsuario; */
+    
 
     public function __construct(/* $usuario, $contraseña, $tipoUsuario */) {
         /* $this->usuario = $usuario;
@@ -22,13 +20,19 @@ class Usuario extends CI_Model{
 
 
     public function findUsers(){
-        $query = $this->db->query('SELECT Usuario, contrasena, TipoUser FROM Alumno UNION 
-        SELECT Usuario, contrasena, TipoUser FROM Maestro UNION
-        SELECT Usuario, contrasena, TipoUser FROM Administrador');
+       
+        $query = $this->db->query("SELECT Usuario, contrasena, TipoUser FROM (SELECT Usuario, contrasena, TipoUser FROM Alumno AS alumno UNION 
+        SELECT Usuario, contrasena, TipoUser FROM Maestro AS maestro UNION
+        SELECT Usuario, contrasena, TipoUser FROM Administrador AS administrador) As usuarios");
         return $query->result();
     }   
 
-    public function findSpecificUser(){
+    public function findSpecificUser($usuario, $contrasena){
+        $query = $this->db->query("SELECT Usuario, contrasena, TipoUser FROM (SELECT Usuario, contrasena, TipoUser FROM Alumno AS alumno UNION 
+        SELECT Usuario, contrasena, TipoUser FROM Maestro AS maestro UNION
+        SELECT Usuario, contrasena, TipoUser FROM Administrador AS administrador) As usuarios WHERE Usuario = '".$usuario."' AND contrasena = '".$contrasena."'");
+
+        return $query->result();
         
     }
 }

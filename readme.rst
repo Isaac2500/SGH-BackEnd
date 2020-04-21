@@ -1,3 +1,6 @@
+## Endpoint para las aulas(temporal)
+http://localhost/SGH-BackEnd/api/aulas
+
 ###################
 What is CodeIgniter
 ###################

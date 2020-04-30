@@ -27,13 +27,15 @@ class MaestroModel extends CI_Model{
     }
 
     public function revisarHorario($usuario) {
-        $sql = "SELECT Horario.Clv_horario, Grupo.Clv_Grupo, Grupo.Clv_Carrera, Horario.Aula, Horario.HInicio, Horario.HFinal,Horario.Dia  
-        FROM Horario Horario
-        JOIN Maestro Maestro
-        ON Maestro.Usuario = horario.Maestro
-        JOIN Grupo Grupo
-        ON Horario.Grupo = Grupo.Clv_Grupo
-        WHERE Maestro.Usuario = ?";
+        $sql = "SELECT Horario.Clv_horario, Grupo.Clv_Grupo, Materia.Materia,Grupo.Clv_Carrera, Horario.Aula, Horario.HInicio, Horario.HFinal,Horario.Dia, Maestro.Nombres,Maestro.ApellidoM, Maestro.ApellidoP
+        from Horario Horario
+        join Maestro Maestro
+        on Maestro.Usuario = horario.Maestro
+        join Grupo Grupo
+        on Horario.Grupo = Grupo.Clv_Grupo
+        join Materia Materia
+        on Horario.Materia = Materia.Clv_Materia
+        where Maestro.Usuario = ?";
         $query = $this->db->query($sql, $usuario);
 
         if($query->num_rows() > 0) {

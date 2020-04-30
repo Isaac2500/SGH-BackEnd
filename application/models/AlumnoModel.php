@@ -44,7 +44,7 @@ class AlumnoModel extends CI_Model implements Consulta{
     }
 
     public function revisarHorario($usuario) {
-        $sql = "SELECT Horario.Clv_Horario,Grupo.Clv_Grupo,Maestro.Nombres, Maestro.ApellidoM, Maestro.ApellidoP,Materia.Materia, Horario.Materia,Horario.aula, Horario.HInicio,Horario.HFinal,Horario.Dia 
+        $sql = "SELECT Horario.Clv_Horario,Grupo.Clv_Grupo,Maestro.Nombres, Maestro.ApellidoM, Maestro.ApellidoP,Materia.Materia, Materia.Clv_materia,Horario.aula, Horario.HInicio,Horario.HFinal,Horario.Dia 
         from alumno alumno
         join Grupo Grupo
         on alumno.clv_Grupo = grupo.Clv_Grupo 

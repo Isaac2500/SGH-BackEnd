@@ -27,7 +27,7 @@ class MaestroModel extends CI_Model{
     }
 
     public function revisarHorario($usuario) {
-        $sql = "SELECT Horario.Clv_horario, Grupo.Clv_Grupo, Materia.Materia,Grupo.Clv_Carrera, Horario.Aula, Horario.HInicio, Horario.HFinal,Horario.Dia, Maestro.Nombres,Maestro.ApellidoM, Maestro.ApellidoP
+        $sql = "SELECT Horario.Clv_horario, Grupo.Clv_Grupo, Materia.Materia, Materia.Clv_materia, Grupo.Clv_Carrera, Horario.Aula, Horario.HInicio, Horario.HFinal,Horario.Dia, Maestro.Nombres,Maestro.ApellidoM, Maestro.ApellidoP
         from Horario Horario
         join Maestro Maestro
         on Maestro.Usuario = horario.Maestro

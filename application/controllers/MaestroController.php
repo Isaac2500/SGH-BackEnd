@@ -24,6 +24,17 @@ class MaestroController extends RestController {
 		$this->response($response['response'], $response['codeHTTP']);
 	}
 
+	public function maestros_materias_get($usuario) {
+		try {
+			$data = $this->MaestroModel->revisarMateria($usuario);
+			$response = $this->peticion->aceptada($data);
+		} catch (\Exception $e) {
+			$response = $this->peticion->rechazada();
+		}
+		
+		$this->response($response['response'], $response['codeHTTP']);
+	}
+
 	public function maestros_horarios_get($usuario) {
 		try {
 			$data = $this->MaestroModel->revisarHorario($usuario);

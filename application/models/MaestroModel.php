@@ -22,8 +22,19 @@ class MaestroModel extends CI_Model{
         }
     }
 
-    public function findAll() {
-        // no implementado
+    public function revisarMateria($materia) {
+        $sql = "SELECT Imparten.Maestro,Maestro.Nombres, Maestro.ApellidoM, Maestro.ApellidoP 
+        from Imparten Imparten 
+        join Maestro Maestro 
+        On Imparten.Maestro = Maestro.Usuario where Clv_Materia= ?";
+        $query = $this->db->query($sql, $materia);
+
+        if($query->num_rows() > 0) {
+            return $query->result();
+        }else {
+            $mensaje['mensaje'] = 'No se encontraron coincidencias';
+            return $mensaje;
+        }
     }
 
     public function revisarHorario($usuario) {

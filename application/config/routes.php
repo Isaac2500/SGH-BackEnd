@@ -58,7 +58,8 @@ $route['api/alumnos/(:any)/horarios']['get'] = 'AlumnoController/alumnos_horario
 
 $route['api/maestros/(:any)']['get'] = 'MaestroController/maestros/$1';
 $route['api/maestros/(:any)/horarios']['get'] = 'MaestroController/maestros_horarios/$1';
- 
+$route['api/maestros/materias/(:any)']['get'] = 'MaestroController/maestros_materias/$1';
+
 $route['api/administradores/(:any)']['get'] = 'AdministradorController/administradores/$1';
 $route['api/horarios']['post'] = 'AdministradorController/horarios';
 

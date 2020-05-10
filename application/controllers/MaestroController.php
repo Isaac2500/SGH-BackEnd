@@ -32,7 +32,7 @@ class MaestroController extends RestController {
 			$response = $this->peticion->rechazada();
 		}
 		
-		$this->response($response['response'], $response['codeHTTP']);
+		$this->response($response['response'], $response['codeHTTP']); 
 	}
 
 }

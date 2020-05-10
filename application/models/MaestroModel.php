@@ -61,7 +61,7 @@ class MaestroModel extends CI_Model{
         }else {
             $mensaje['mensaje'] = 'No se encontraron coincidencias';
             return $mensaje;
-        }
+        } 
     }
 
     public function revisarGrupos() {

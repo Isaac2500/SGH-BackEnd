@@ -42,6 +42,14 @@ class AdministradorController extends RestController {
 		}
         
         $this->response($response['response'], $response['codeHTTP']);
-	}
+    }
+    
+    public function horarios_options() {
+        $headers['Access-Control-Allow-Origin'] = '*';
+        $headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS';
+        $headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method';
+        
+        $this->response($headers, 200);
+    }
 }
 ?>

@@ -8,10 +8,6 @@ class AlumnoController extends RestController {
 
     public function __construct() {
 		parent::__construct();
-		
-		header('Access-Control-Allow-Origin: *');
-        header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 
         $this->load->model($this->modelName);
         $this->peticion = new Peticion();
@@ -28,13 +24,9 @@ class AlumnoController extends RestController {
 		$this->response($response['response'], $response['codeHTTP']);
 	}
 
-	public function alumnos_horarios_get($usuario, $dia) {
+	public function alumnos_horarios_get($usuario) {
 		try {
-			if(isset($dia)) {
-				$data = $this->AlumnoModel->revisarHorario($usuario);
-			}else {
-				$data = $this->AlumnoModel->revisarHorario($usuario, $dia);
-			}
+			$data = $this->AlumnoModel->revisarHorario($usuario);
 			$response = $this->peticion->aceptada($data);
 		} catch (\Exception $e) {
 			$response = $this->peticion->rechazada();

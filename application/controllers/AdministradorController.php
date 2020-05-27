@@ -8,10 +8,6 @@ class AdministradorController extends RestController {
 
     public function __construct() {
         parent::__construct();
-
-        header('Access-Control-Allow-Origin: *');
-        header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
         
         $this->load->model($this->modelName);
         $this->peticion = new Peticion();
@@ -46,6 +42,32 @@ class AdministradorController extends RestController {
 		}
         
         $this->response($response['response'], $response['codeHTTP']);
-	}
+    }
+
+    public function buscar_post(){
+        $horario = $this->post();
+        $maestro = $horario['maestro'];
+        $grupo = $horario['grupo'];
+        $materia = $horario['materia'];
+        $aula = $horario['aula'];
+        $hInicio = $horario['hInicio'];
+        $hFinal = $horario['hFinal'];
+        $dia = $horario['dia'];
+        try {
+            $respuesta = $this->AdministradorModel->validarHorario($maestro, $grupo, $materia, $aula, $hInicio, $hFinal, $dia);
+            $response = $this->peticion->aceptada($respuesta);
+        } catch (\Exception $e) {
+            $response = $this->peticion->rechazada();
+        }
+        $this->response($response['response'], $response['codeHTTP']);
+    }
+    
+    public function horarios_options() {
+        $headers['Access-Control-Allow-Origin'] = '*';
+        $headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS';
+        $headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method';
+        
+        $this->response($headers, 200);
+    }
 }
 ?>

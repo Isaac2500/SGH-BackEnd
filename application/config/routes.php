@@ -54,13 +54,16 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['api/alumnos/(:any)']['get'] = 'AlumnoController/alumnos/$1';
-$route['api/alumnos/(:any)/horarios/(:any)']['get'] = 'AlumnoController/alumnos_horarios/$1/$2';
+$route['api/alumnos/(:any)/horarios']['get'] = 'AlumnoController/alumnos_horarios/$1';
 
 $route['api/maestros/(:any)']['get'] = 'MaestroController/maestros/$1';
-$route['api/maestros/(:any)/horarios/(:any)']['get'] = 'MaestroController/maestros_horarios/$1/$2';
+$route['api/maestros/(:any)/horarios']['get'] = 'MaestroController/maestros_horarios/$1';
+$route['api/maestros/materias/(:any)']['get'] = 'MaestroController/maestros_materias/$1';
 
 $route['api/administradores/(:any)']['get'] = 'AdministradorController/administradores/$1';
 $route['api/horarios']['post'] = 'AdministradorController/horarios';
+$route['api/horarios']['options'] = 'AdministradorController/horarios';
+$route['api/horarios/creacion']['post'] = 'AdministradorController/buscar';
 
 $route['api/usuarios']['get'] = 'UsuarioController/usuarios';
 $route['api/usuarios/(:any)']['get'] = 'UsuarioController/usuarios/$1';

@@ -22,18 +22,31 @@ class MaestroModel extends CI_Model{
         }
     }
 
-    public function findAll() {
-        // no implementado
+    public function revisarMateria($materia) {
+        $sql = "SELECT Imparten.Maestro,Maestro.Nombres, Maestro.ApellidoM, Maestro.ApellidoP 
+        from Imparten Imparten 
+        join Maestro Maestro 
+        On Imparten.Maestro = Maestro.Usuario where Clv_Materia= ?";
+        $query = $this->db->query($sql, $materia);
+
+        if($query->num_rows() > 0) {
+            return $query->result();
+        }else {
+            $mensaje['mensaje'] = 'No se encontraron coincidencias';
+            return $mensaje;
+        }
     }
 
     public function revisarHorario($usuario) {
-        $sql = "SELECT Horario.Clv_horario, Grupo.Clv_Grupo, Grupo.Clv_Carrera, Horario.Aula, Horario.HInicio, Horario.HFinal,Horario.Dia  
-        FROM Horario Horario
-        JOIN Maestro Maestro
-        ON Maestro.Usuario = horario.Maestro
-        JOIN Grupo Grupo
-        ON Horario.Grupo = Grupo.Clv_Grupo
-        WHERE Maestro.Usuario = ?";
+        $sql = "SELECT Horario.Clv_horario, Grupo.Clv_Grupo, Materia.Materia, Materia.Clv_materia, Grupo.Clv_Carrera, Horario.Aula, Horario.HInicio, Horario.HFinal,Horario.Dia, Maestro.Nombres,Maestro.ApellidoM, Maestro.ApellidoP
+        from Horario Horario
+        join Maestro Maestro
+        on Maestro.Usuario = horario.Maestro
+        join Grupo Grupo
+        on Horario.Grupo = Grupo.Clv_Grupo
+        join Materia Materia
+        on Horario.Materia = Materia.Clv_Materia
+        where Maestro.Usuario = ?";
         $query = $this->db->query($sql, $usuario);
 
         if($query->num_rows() > 0) {
@@ -59,7 +72,7 @@ class MaestroModel extends CI_Model{
         }else {
             $mensaje['mensaje'] = 'No se encontraron coincidencias';
             return $mensaje;
-        }
+        } 
     }
 
     public function revisarGrupos() {

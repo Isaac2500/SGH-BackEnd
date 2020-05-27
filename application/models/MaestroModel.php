@@ -1,7 +1,7 @@
 <?php
 require(APPPATH.'models/Consulta.php');
 
-class MaestroModel extends CI_Model{
+class MaestroModel extends CI_Model {
 
     public function __construct() {
         parent::__construct();

@@ -35,7 +35,7 @@ class AdministradorController extends RestController {
         $dia = $horario['dia'];
 
 		try {
-            $data = $this->AdministradorModel->agregarHorario($maestro, $grupo, $materia, $aula, $hInicio, $hFinal, $dia);
+            $data = $this->AdministradorModel->validarHorario($maestro, $grupo, $materia, $aula, $hInicio, $hFinal, $dia);
             $response = $this->peticion->aceptada($data);
 		} catch (\Exception $e) {
             $response = $this->peticion->rechazada();

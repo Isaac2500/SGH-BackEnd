@@ -1,7 +1,7 @@
 <?php
 require(APPPATH.'models/Consulta.php');
 
-class GrupoModel extends CI_Model implements Consulta{
+class GrupoModel extends CI_Model implements Consulta {
 
     public function __construct() {
         parent::__construct();
@@ -20,7 +20,7 @@ class GrupoModel extends CI_Model implements Consulta{
         }
     }
 
-    public function findAll(){
+    public function findAll() {
         $this->db->select('Clv_Grupo');
         $this->db->from('Grupo');
         $query = $this->db->get();

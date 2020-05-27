@@ -35,30 +35,12 @@ class AdministradorController extends RestController {
         $dia = $horario['dia'];
 
 		try {
-            $data = $this->AdministradorModel->agregarHorario($maestro, $grupo, $materia, $aula, $hInicio, $hFinal, $dia);
+            $data = $this->AdministradorModel->validarHorario($maestro, $grupo, $materia, $aula, $hInicio, $hFinal, $dia);
             $response = $this->peticion->aceptada($data);
 		} catch (\Exception $e) {
             $response = $this->peticion->rechazada();
 		}
         
-        $this->response($response['response'], $response['codeHTTP']);
-    }
-
-    public function buscar_post(){
-        $horario = $this->post();
-        $maestro = $horario['maestro'];
-        $grupo = $horario['grupo'];
-        $materia = $horario['materia'];
-        $aula = $horario['aula'];
-        $hInicio = $horario['hInicio'];
-        $hFinal = $horario['hFinal'];
-        $dia = $horario['dia'];
-        try {
-            $respuesta = $this->AdministradorModel->validarHorario($maestro, $grupo, $materia, $aula, $hInicio, $hFinal, $dia);
-            $response = $this->peticion->aceptada($respuesta);
-        } catch (\Exception $e) {
-            $response = $this->peticion->rechazada();
-        }
         $this->response($response['response'], $response['codeHTTP']);
     }
     

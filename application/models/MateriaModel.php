@@ -1,7 +1,7 @@
 <?php
 require(APPPATH.'models/Consulta.php');
 
-class MateriaModel extends CI_Model implements Consulta{
+class MateriaModel extends CI_Model implements Consulta {
 
     public function __construct() {
         parent::__construct();

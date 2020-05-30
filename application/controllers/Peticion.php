@@ -1,9 +1,11 @@
 <?php
 
-class Peticion {
+class Peticion 
+{
 	private $informacion;
 
-    public function aceptada($data) {
+	public function aceptada($data) 
+	{
 		$response['data'] = $data;
 		$response['success'] = true;
 		$response['message'] = 'Successful Request';
@@ -14,7 +16,8 @@ class Peticion {
 		return $this->informacion;
 	}
 	
-	public function rechazada() {
+	public function rechazada() 
+	{
 		$response['success'] = false;
 		$response['message'] = 'Server Error';
 	

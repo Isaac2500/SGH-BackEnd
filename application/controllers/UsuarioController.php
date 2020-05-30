@@ -2,18 +2,21 @@
 use Restserver\Libraries\RestController;
 require_once(APPPATH . 'controllers/header.php');
 
-class UsuarioController extends RestController {
-    private $modelName = "UsuarioModel";
+class UsuarioController extends RestController 
+{
+    private $NOMBRE_MODELO = "UsuarioModel";
     private $peticion;
 
-    public function __construct() {
+	public function __construct() 
+	{
 		parent::__construct();
 
-        $this->load->model($this->modelName);
+        $this->load->model($this->NOMBRE_MODELO);
         $this->peticion = new Peticion();
     }
     
-	public function usuarios_get($usuario = null) {
+    public function usuarios_get($usuario = null)
+	{
         try {
 			if(isset($usuario)) {
 				$data = $this->UsuarioModel->findSpecific($usuario);

@@ -2,30 +2,33 @@
 use Restserver\Libraries\RestController;
 require_once(APPPATH . 'controllers/header.php');
 
-class GrupoController extends RestController {
-    private $modelName = "GrupoModel";
-    private $peticion;
+class GrupoController extends RestController
+{
+      private $NOMBRE_MODELO = "GrupoModel";
+      private $peticion;
 
-    public function __construct() {
-        parent::__construct();
+      public function __construct()
+      {
+            parent::__construct();
 
-        $this->load->model($this->modelName);
-        $this->peticion = new Peticion();
-    }
+            $this->load->model($this->NOMBRE_MODELO);
+            $this->peticion = new Peticion();
+      }
 
-    public function grupos_get() {
+      public function grupos_get() 
+      {
 		try {
-            $data = $this->GrupoModel->findAll();
-            $response = $this->peticion->aceptada($data);
-
+                  $data = $this->GrupoModel->findAll();
+                  $response = $this->peticion->aceptada($data);
 		} catch (\Exception $e) {
-            $response = $this->peticion->rechazada();
+                  $response = $this->peticion->rechazada();
 		}
 		
 		$this->response($response['response'], $response['codeHTTP']);
       }
       
-      public function tipo_materia_get($Clv_grupo) {
+      public function tipo_materia_get($Clv_grupo) 
+      {
             try {
                   $data = $this->GrupoModel->findSpecific($Clv_grupo);
                   $response = $this->peticion->aceptada($data, true);

@@ -25,10 +25,6 @@ class AdministradorModel extends CI_Model implements Consulta
         }
     }
 
-    public function findAll() 
-    {
-        // no implementado
-    }
     
     public function validarHorario($maestro, $grupo, $materia, $aula, $hInicio, $hFinal, $dia) 
     {
@@ -36,9 +32,9 @@ class AdministradorModel extends CI_Model implements Consulta
         $mensaje['maestro'] = $this->validarMaestro($hInicio, $hFinal, $maestro, $dia);
         $mensaje['grupo'] = $this->validarGrupo($hInicio, $hFinal, $grupo, $dia);
 
-        if(in_array(true, $mensaje)) {
+        if (in_array(true, $mensaje)) {
             return $mensaje;
-        }else {
+        } else {
             $this->agregarHorario($maestro, $grupo, $materia, $aula, $hInicio, $hFinal, $dia);
             return "Horario Creado.";
         }
@@ -59,7 +55,8 @@ class AdministradorModel extends CI_Model implements Consulta
         return $this->validar($query->num_rows());
     }
 
-    private function validarMaestro($hInicio, $hFinal, $maestro, $dia)
+
+    private function validarMaestro($hInicio, $hFinal, $maestro, $dia) 
     {
         $sql = "SELECT * FROM horario WHERE ((? >= HInicio AND ? < HFinal) OR (HInicio < ? AND ? <= HFinal)) AND Maestro = ? AND Dia = ?";
         $query = $this->db->query($sql, array($hInicio, $hInicio, $hFinal, $hFinal, $maestro, $dia));
@@ -77,7 +74,16 @@ class AdministradorModel extends CI_Model implements Consulta
 
     private function validar($num_rows) 
     {
-        return $num_rows > 0;
+        if ($num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function findAll()
+    {
+        
     }
 }
 ?>

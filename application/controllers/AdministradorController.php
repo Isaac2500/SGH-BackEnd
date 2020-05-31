@@ -2,18 +2,21 @@
 use Restserver\Libraries\RestController;
 require_once(APPPATH . 'controllers/header.php');
 
-class AdministradorController extends RestController {
-    private $modelName = "AdministradorModel";
+class AdministradorController extends RestController 
+{
+    private $NOMBRE_MODELO = "AdministradorModel";
     private $peticion;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         
-        $this->load->model($this->modelName);
+        $this->load->model($this->NOMBRE_MODELO);
         $this->peticion = new Peticion();
     }
 
-    public function administradores_get($usuario) {
+    public function administradores_get($usuario)
+    {
 		try {
             $data = $this->AdministradorModel->findSpecific($usuario);
             $response = $this->peticion->aceptada($data);
@@ -24,7 +27,8 @@ class AdministradorController extends RestController {
 		$this->response($response['response'], $response['codeHTTP']);
     }
     
-	public function horarios_post() {
+    public function horarios_post() 
+    {
         $horario = $this->post();
         $maestro = $horario['maestro'];
         $grupo = $horario['grupo'];
@@ -44,7 +48,8 @@ class AdministradorController extends RestController {
         $this->response($response['response'], $response['codeHTTP']);
     }
     
-    public function horarios_options() {
+    public function horarios_options() 
+    {
         $headers['Access-Control-Allow-Origin'] = '*';
         $headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS';
         $headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method';

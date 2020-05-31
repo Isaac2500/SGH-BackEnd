@@ -17,17 +17,17 @@ class AdministradorModel extends CI_Model implements Consulta
         $this->db->where('Usuario =', $usuario);
         $query = $this->db->get();
 
-        if ($query->num_rows() > 0) {
+        if($query->num_rows() > 0) {
             return $query->result();
         } else {
             $mensaje['mensaje'] = 'No se encontraron coincidencias';
             return $mensaje;
         }
     }
+
     
     public function validarHorario($maestro, $grupo, $materia, $aula, $hInicio, $hFinal, $dia) 
     {
-
         $mensaje['aula'] = $this->validarAula($hInicio, $hFinal, $aula, $dia);
         $mensaje['maestro'] = $this->validarMaestro($hInicio, $hFinal, $maestro, $dia);
         $mensaje['grupo'] = $this->validarGrupo($hInicio, $hFinal, $grupo, $dia);
@@ -54,6 +54,7 @@ class AdministradorModel extends CI_Model implements Consulta
 
         return $this->validar($query->num_rows());
     }
+
 
     private function validarMaestro($hInicio, $hFinal, $maestro, $dia) 
     {
@@ -85,3 +86,4 @@ class AdministradorModel extends CI_Model implements Consulta
         
     }
 }
+?>

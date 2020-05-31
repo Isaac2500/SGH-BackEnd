@@ -2,18 +2,21 @@
 use Restserver\Libraries\RestController;
 require_once(APPPATH . 'controllers/header.php');
 
-class MateriaController extends RestController {
-    private $modelName = "MateriaModel";
+class MateriaController extends RestController 
+{
+    private $NOMBRE_MODELO = "MateriaModel";
     private $peticion;
 
-    public function __construct() {
+	public function __construct() 
+	{
 		parent::__construct();
 
-        $this->load->model($this->modelName);
+		$this->load->model($this->NOMBRE_MODELO);
         $this->peticion = new Peticion();
     }
 
-	public function imparten_maestros_get($Clv_Materia) {
+	public function imparten_maestros_get($Clv_Materia) 
+	{
 		try {
 			$data = $this->MateriaModel->materiasPorMaestro($Clv_Materia);
 			$response = $this->peticion->aceptada($data);

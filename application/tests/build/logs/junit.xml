@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="PU_AdministradorMDL" file="C:\xampp\htdocs\SGH-BackEnd\application\tests\PU_AdministradorMDL.php" tests="2" assertions="2" failures="0" errors="0" time="0.047028">
+    <testcase name="test_findSpecific" class="PU_AdministradorMDL" file="C:\xampp\htdocs\SGH-BackEnd\application\tests\PU_AdministradorMDL.php" line="13" assertions="1" time="0.021974"/>
+    <testcase name="test_validarHorario" class="PU_AdministradorMDL" file="C:\xampp\htdocs\SGH-BackEnd\application\tests\PU_AdministradorMDL.php" line="28" assertions="1" time="0.025054"/>
+  </testsuite>
+</testsuites>

@@ -1,43 +1,48 @@
 <?php
 require(APPPATH.'models/Consulta.php');
 
-class MaestroModel extends CI_Model {
+class MaestroModel extends CI_Model 
+{
 
-    public function __construct() {
+    public function __construct() 
+    {
         parent::__construct();
         $this->load->database();
     }
 
-    public function findSpecific($usuario) {
+    public function findSpecific($usuario) 
+    {
         $this->db->select('nombres, ApellidoP, ApellidoM');
         $this->db->from('Maestro');
         $this->db->where('Usuario = ', $usuario);
         $query = $this->db->get();
 
-        if($query->num_rows() > 0) {
+        if ($query->num_rows() > 0) {
             return $query->result();
-        }else {
+        } else {
             $mensaje['mensaje'] = 'No se encontraron coincidencias';
             return $mensaje;
         }
     }
 
-    public function revisarMateria($materia) {
+    public function revisarMateria($materia) 
+    {
         $sql = "SELECT Imparten.Maestro,Maestro.Nombres, Maestro.ApellidoM, Maestro.ApellidoP 
         from Imparten Imparten 
         join Maestro Maestro 
         On Imparten.Maestro = Maestro.Usuario where Clv_Materia= ?";
         $query = $this->db->query($sql, $materia);
 
-        if($query->num_rows() > 0) {
+        if ($query->num_rows() > 0) {
             return $query->result();
-        }else {
+        } else {
             $mensaje['mensaje'] = 'No se encontraron coincidencias';
             return $mensaje;
         }
     }
 
-    public function revisarHorario($usuario) {
+    public function revisarHorario($usuario) 
+    {
         $sql = "SELECT Horario.Clv_horario, Grupo.Clv_Grupo, Materia.Materia, Materia.Clv_materia, Grupo.Clv_Carrera, Horario.Aula, Horario.HInicio, Horario.HFinal,Horario.Dia, Maestro.Nombres,Maestro.ApellidoM, Maestro.ApellidoP
         from Horario Horario
         join Maestro Maestro
@@ -49,15 +54,16 @@ class MaestroModel extends CI_Model {
         where Maestro.Usuario = ?";
         $query = $this->db->query($sql, $usuario);
 
-        if($query->num_rows() > 0) {
+        if ($query->num_rows() > 0) {
             return $query->result();
-        }else {
+        } else {
             $mensaje['mensaje'] = 'No se encontraron coincidencias';
             return $mensaje;
         }
     }
 
-    public function revisarHorarioDia($usuario, $dia) {
+    public function revisarHorarioDia($usuario, $dia) 
+    {
         $sql = "SELECT Horario.Clv_horario, Grupo.Clv_Grupo, Grupo.Clv_Carrera, Horario.Aula, Horario.HInicio, Horario.HFinal,Horario.Dia  
         FROM Horario Horario
         JOIN Maestro Maestro
@@ -67,15 +73,16 @@ class MaestroModel extends CI_Model {
         WHERE Maestro.Usuario = ? AND Dia = ?";
         $query = $this->db->query($sql, array($usuario, $dia));
 
-        if($query->num_rows() > 0) {
+        if ($query->num_rows() > 0) {
             return $query->result();
-        }else {
+        } else {
             $mensaje['mensaje'] = 'No se encontraron coincidencias';
             return $mensaje;
         } 
     }
 
-    public function revisarGrupos() {
+    public function revisarGrupos() 
+    {
         //no definido
     }
 }
